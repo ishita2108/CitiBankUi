@@ -1,25 +1,33 @@
-import logo from './logo.svg';
+
 import './App.css';
+import AddCustomer from './components/AddCustomer';
+import Navbar from './components/Navbar';
+import CustomerList from './components/CustomerList';
+import ViewAccounts from './components/ViewAccounts';
+import AddAccount from './components/AddAccount';
+import AggregateBalance from './components/AggregateBalance';
+import { BrowserRouter, Routes,Route } from 'react-router-dom';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  return(
+  <>
+  <BrowserRouter>
+  <Navbar/>
+  <Routes>
+        <Route path="/" element={<CustomerList/>}></Route>
+        <Route index element={<CustomerList/>}></Route>
+        <Route path="/customerList" element={<CustomerList/>}></Route>
+        <Route path="/addCustomer" element={<AddCustomer />}></Route>
+        <Route path="/viewAccounts" element={<ViewAccounts />}></Route>
+        <Route path="/addAccounts" element={<AddAccount />}></Route>
+        <Route path="/aggBalance" element={<AggregateBalance />}></Route>
+
+  </Routes>
+  </BrowserRouter>
+  
+  </>
   );
+ 
 }
 
 export default App;
