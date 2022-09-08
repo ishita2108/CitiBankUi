@@ -4,7 +4,6 @@ import CustomerService from '../services/CustomerService';
 
 const Login = () => {
     const [user, setUser] = useState({
-        id:"",
         username:"",
         password:"",
     })
@@ -12,10 +11,23 @@ const Login = () => {
         const value = e.target.value;
         setUser({...user,[e.target.name]:value})
     }
+    var myHeaders = new Headers();
+myHeaders.append("Authorization", "Basic aXNoaXRhMjE6aXNoaXRhQDEyMw==");
+myHeaders.append("Cookie", "JSESSIONID=99533E4127682FBB7FD2E066CD981729");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("http://localhost:8090/citiapp/accounts", requestOptions)
+  .then(response => response.text())
+  .catch(error => console.log('error', error));
 
     const handleSubmit = (e) => {
         e.preventDefault(e);
-            let res = CustomerService.login().then((response)=>{
+            let res = CustomerService.login(user).then((response)=>{
                 navigate("/customerList")
               
             }).catch(err =>{

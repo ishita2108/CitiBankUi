@@ -30,7 +30,7 @@ const ViewAccounts = () => {
         <h2 className=' text-center font-lg text-gray-800 uppercase tracking-wider py-3 px-5'>{state.name}</h2>
     </div>
     <div><AddAccount accounts={accounts} state={"id"}/></div>
-    <div><AggregateBalance state={"id"}/></div>
+    <div><AggregateBalance accounts={accounts} state={"id"}/></div>
     <div className='flex shadow border-b mx-2 my-3'>
         <table className='min-w-full'>
             <thead className='bg-gray-50'>

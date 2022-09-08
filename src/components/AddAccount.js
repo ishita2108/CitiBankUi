@@ -18,7 +18,7 @@ const AddAccount = () => {
     const saveAccount=(e)=>{
     e.preventDefault();
     try{
-    CustomerService.saveAccounts(state.id,account).then(
+    CustomerService.saveAccounts(state.id,account).then((response)=>
         window.location.reload(false))
     }catch(error){
         console.log(error)
