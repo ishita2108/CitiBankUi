@@ -7,7 +7,6 @@ const Login = () => {
         id:"",
         username:"",
         password:"",
-        loggedIn:""
     })
     const handleChange = (e) =>{
         const value = e.target.value;
@@ -16,7 +15,7 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault(e);
-            let res = CustomerService.login(user).then((response)=>{
+            let res = CustomerService.login().then((response)=>{
                 navigate("/customerList")
               
             }).catch(err =>{

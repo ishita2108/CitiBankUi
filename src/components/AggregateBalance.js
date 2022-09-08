@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import CustomerService from '../services/CustomerService'
+import { useNavigate,useLocation } from 'react-router-dom'
 
 const AggregateBalance = () => {
-
+   const { state } = useLocation();
     const [balance, setBalance] = useState(null);
     const [loading, setLoading] = useState(true)
 
@@ -10,7 +11,7 @@ const AggregateBalance = () => {
       const fetchData = async  () => {
         setLoading(true);
         try{
-            const response = await CustomerService.getBalance(68);
+            const response = await CustomerService.getBalance(state.id);
             setBalance(response.data);
         }catch(error){
             console.log(error)

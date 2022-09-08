@@ -1,10 +1,10 @@
-import React,{ useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React,{ useState, useEffect } from 'react'
+import { useNavigate ,useLocation} from 'react-router-dom'
 import CustomerService from '../services/CustomerService';
 
 const AddAccount = () => {
     const navigate = useNavigate();
-
+    const { state } = useLocation();
     const [account, setAccount] = useState({
         accountNo: "",
         balance:""
@@ -14,15 +14,16 @@ const AddAccount = () => {
         const value = e.target.value;
         setAccount({...account,[e.target.name]:value})
     }
-
+    
     const saveAccount=(e)=>{
-        e.preventDefault();
-        CustomerService.saveAccounts(68,account).then((response)=>{
-            navigate("/customerList")
-        }).catch((error)=>{
-            console.log(error)
-        })
-    }
+    e.preventDefault();
+    try{
+    CustomerService.saveAccounts(state.id,account).then(
+        window.location.reload(false))
+    }catch(error){
+        console.log(error)
+    }}
+   
     const reset = (e) =>{
         e.preventDefault();
         setAccount({

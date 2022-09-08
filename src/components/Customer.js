@@ -42,7 +42,12 @@ const Customer = ({customer}) => {
     </td>
     <td className='text-left px-2 py-4 whitespace-nowrap'>
         <div className='text-sm px-2 py-2 text-white bg-blue-500 hover:bg-blue-900'>
-            <button onClick={()=> navigate("/viewAccounts")}>
+            <button onClick={()=> navigate("/viewAccounts", {
+        state: {
+          "id": customer.id,
+          "name":customer.name
+        },
+      })}>
                 View Accounts</button></div>
     </td>
     {/* <ViewAccounts customer={customer} id={customer.id}/> */}
