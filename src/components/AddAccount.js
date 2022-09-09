@@ -65,7 +65,6 @@ const AddAccount = () => {
   return (
     <>
       <div className="my-3">
-       
       </div>
       <Box sx={{ maxWidth: 400 }} mx={5}>
         <Card variant="outlined" sx={{ minHeight: 250 }}>
