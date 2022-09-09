@@ -12,8 +12,6 @@ const Register = () => {
         loggedIn:""
     })
 
-    const [error, setError] = useState(null);
-
     const navigate = useNavigate();
 
     const handleSubmit = (e)=>{

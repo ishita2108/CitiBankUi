@@ -8,12 +8,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 import CustomerService from "../services/CustomerService";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import Grid from "@mui/material/Grid";
-import FormControl from "@mui/material/FormControl";
 import Typography from "@mui/material/Typography";
-import AggregateBalance from "./AggregateBalance";
+
 
 const AddAccount = () => {
   const navigate = useNavigate();

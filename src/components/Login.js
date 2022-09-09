@@ -3,40 +3,28 @@ import { useNavigate } from 'react-router-dom'
 import CustomerService from '../services/CustomerService';
 
 const Login = () => {
+    const navigate = useNavigate();
     const [user, setUser] = useState({
+        id: "",
         username:"",
         password:"",
+        loggedIn : ""
     })
     const handleChange = (e) =>{
         const value = e.target.value;
         setUser({...user,[e.target.name]:value})
     }
-    var myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic aXNoaXRhMjE6aXNoaXRhQDEyMw==");
-myHeaders.append("Cookie", "JSESSIONID=99533E4127682FBB7FD2E066CD981729");
 
-var requestOptions = {
-  method: 'GET',
-  headers: myHeaders,
-  redirect: 'follow'
-};
-
-fetch("http://localhost:8090/citiapp/accounts", requestOptions)
-  .then(response => response.text())
-  .catch(error => console.log('error', error));
-
-    const handleSubmit = (e) => {
-        e.preventDefault(e);
-            let res = CustomerService.login(user).then((response)=>{
-                navigate("/customerList")
-              
-            }).catch(err =>{
-                alert("Username Or Password is Incorrect")
-                    
-            })
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+        CustomerService.login(user).then((response)=>{
+            navigate("/customerList")
+        }).catch((error)=>{
+            alert("UserName or Password is Incorrect")
+        })
     }
 
-    const navigate = useNavigate();
+    
 
   return (
     <div className='container mx-2 my-8'>

@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import { CropLandscapeOutlined } from '@mui/icons-material';
 
 const AddCustomer = () => {
     const navigate = useNavigate();
@@ -26,17 +27,7 @@ const AddCustomer = () => {
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
 
-    useEffect(() => {
-        console.log(formErrors)
-        if(Object.keys(formErrors).length === 0 && isSubmit){
-            console.log(customer)
-            CustomerService.saveCustomer(customer).then((response)=>{
-                navigate("/customerList")
-            }).catch((error)=>{
-                console.log(error)
-            })
-        }
-    }, [formErrors])
+    
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -59,6 +50,9 @@ const AddCustomer = () => {
         if(!contactValid.test(customer.contactDetails)){
             errors.contactDetails = " Add proper Contact Number of 10 digits"
         }
+        else if (values.contactDetails.length !== 10){
+            errors.contactDetails = "Phone Number Can not have more than 10 digits"
+        }
 
         if(!panValid.test(customer.panNo)){
             errors.panNo = " Add proper Pan Number"
@@ -72,12 +66,25 @@ const AddCustomer = () => {
             errors.passportNo = " Add proper Passport Number"
         }
 
-        if(!kycValid.test(customer.kycNo)){
+        if(!kycValid.test(customer.kycNo) ){
+            errors.kycNo = " Add proper KYC Number of 14  digits"
+        }
+        else if(values.kycNo.length > 14){
             errors.kycNo = " Add proper KYC Number of 14  digits"
         }
         return errors;
     }
-       
+    useEffect(() => {
+        console.log(formErrors)
+        if(Object.keys(formErrors).length === 0 && isSubmit){
+            console.log(customer)
+            CustomerService.saveCustomer(customer).then((response)=>{
+                navigate("/customerList")
+            }).catch((error)=>{
+                console.log(error)
+            })
+        }
+    }, [formErrors])
 
     const handleChange =(e)=>{
         const value = e.target.value;

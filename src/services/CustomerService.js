@@ -5,13 +5,6 @@ const ACCOUNT_API_BASE_URL = "http://localhost:8090/citiapp/accounts/customer";
 const ACCOUNT_API_AGG_URL = "http://localhost:8090/citiapp/accounts/customer/aggBalance";
 const USER_API_BASE_URL = "http://localhost:8090/citiapp/users";
 
-// const ACC_API = "http://localhost:8090/citiapp/accounts";
-
-// const headers = {
-//     'Content-Type': 'application/json',
-//     'Authorization': 'Basic aXNoaXRhMjE6aXNoaXRhQDEyMw=='
-// }
-
 class CustomerService{
 
     saveCustomer(customer){
@@ -40,11 +33,6 @@ class CustomerService{
     login(user){
         return axios.post(USER_API_BASE_URL+"/login",user)
     }
-
-    // login(user){
-    //     return axios.post(ACC_API, user,{headers:headers})
-    // }
-
 }
 
 export default new CustomerService();

@@ -26,7 +26,6 @@ const Navbar = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Citi Bank App
           </Typography>
-          <Button color="inherit" onClick={()=> navigate("/login")}>Login</Button>
         </Toolbar>
       </AppBar>
     </Box>

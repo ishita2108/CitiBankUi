@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import CustomerService from "../services/CustomerService";
 import Customer from "./Customer";
-import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,10 +12,10 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import AddIcon from "@mui/icons-material/Add";
-import { Padding } from "@mui/icons-material";
 
 const CustomerList = () => {
   const navigate = useNavigate();
+  const { logs } = useLocation();
 
   const [customers, setCustomers] = useState(null);
 
@@ -39,9 +36,8 @@ const CustomerList = () => {
   }, []);
 
   return (
-    <>
-    <CssBaseline />
-
+    <> 
+     <CssBaseline />
         <div className="py-5 mx-2">
         <Button
           variant="contained"
@@ -75,7 +71,7 @@ const CustomerList = () => {
       ))}</TableBody>)}
         </Table>
         </TableContainer>
-
+    
     </>
   );
 };
