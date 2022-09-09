@@ -1,62 +1,130 @@
-import React,{ useState, useEffect } from 'react'
-import { useNavigate ,useLocation} from 'react-router-dom'
-import CustomerService from '../services/CustomerService';
+import React, { useState, useEffect } from "react";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import TextField from "@mui/material/TextField";
+import { useNavigate, useLocation } from "react-router-dom";
+import CustomerService from "../services/CustomerService";
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import SaveAltIcon from "@mui/icons-material/SaveAlt";
+import Grid from "@mui/material/Grid";
+import FormControl from "@mui/material/FormControl";
+import Typography from "@mui/material/Typography";
+import AggregateBalance from "./AggregateBalance";
 
 const AddAccount = () => {
-    const navigate = useNavigate();
-    const { state } = useLocation();
-    const [account, setAccount] = useState({
-        accountNo: "",
-        balance:""
-    });
+  const navigate = useNavigate();
+  const { state } = useLocation();
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [account, setAccount] = useState({
+    accountNo: "",
+    balance: "",
+  });
 
-    const handleChange = (e) =>{
-        const value = e.target.value;
-        setAccount({...account,[e.target.name]:value})
-    }
-    
-    const saveAccount=(e)=>{
-    e.preventDefault();
-    try{
-    CustomerService.saveAccounts(state.id,account).then((response)=>
-        window.location.reload(false))
-    }catch(error){
-        console.log(error)
-    }}
-   
-    const reset = (e) =>{
-        e.preventDefault();
-        setAccount({
-            accountNo: "",
-            balance:""
+  useEffect(() => {
+    console.log(formErrors);
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      CustomerService.saveAccounts(state.id, account)
+        .then((response) => {
+          window.location.reload();
         })
+        .catch((error) => {
+          console.log(error);
+        });
     }
+  }, [formErrors]);
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setAccount({ ...account, [e.target.name]: value });
+  };
+  const validate = (values) => {
+    const errors = {};
+    if (isNaN(values.balance)) {
+      errors.balance = "Add proper Amount";
+    }
+    return errors;
+  };
+
+  const saveAccount = (e) => {
+    e.preventDefault();
+    setFormErrors(validate(account));
+    setIsSubmit(true);
+  };
+
+  const reset = (e) => {
+    e.preventDefault();
+    setAccount({
+      accountNo: "",
+      balance: "",
+    });
+  };
 
   return (
-    <div className='container mx-2 my-8'>
-          <div className='h-12  mx-0'>
-        <button onClick={()=> navigate("/customerList")}
-        className='rounded bg-slate-600 text-white py-2 px-6 font-semibold'> Back</button>
-        </div>
-    <div className='flex  max-w-2xl mx-auto shadow border-b'>
-        <div className='px-8 py-8'>
-            <div className='font-thin text-2xl tracking-wider'>
-                <h2>Add New Account</h2>
-            </div>
-            <div className='items-center justify-center h-14 w-full my-4'>
-                <label className='block text-gray-600 text-sm  font-normal'> Balance</label>
-                <input type="text" name="balance" value={account.balance}
-                    onChange={(e) => handleChange(e)}
-                   className='h-10 w-96 border mt-2 px-2 py-2'></input>
-            </div>
-            <div className='items-center justify-center h-14 w-full my-4 space-x-4 pt-4'>
-               <button onClick={saveAccount} className='rounded text-white font-semibold bg-green-400 py-2 px-2 hover:bg-green-700' type='submit'>Save</button>
-               <button onClick={reset} className='rounded text-white font-semibold bg-red-400 py-2 px-2 hover:bg-red-700' type='submit'>Clear</button>
-            </div>
-        </div>
-    </div>
-    </div>
-  )
-}
+    <>
+      <div className="my-3">
+       
+      </div>
+      <Box sx={{ maxWidth: 400 }} mx={5}>
+        <Card variant="outlined" sx={{ minHeight: 250 }}>
+          <Grid
+            item
+            container
+            direction="row"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <form onSubmit={saveAccount}>
+              <CardContent>
+                <Typography
+                  sx={{ fontSize: 28 }}
+                  color="text.secondary"
+                  gutterBottom
+                >
+                  Add Account
+                </Typography>
+                <TextField
+                  required
+                  id="filled-required"
+                  label="Add Amount"
+                  variant="filled"
+                  name="balance"
+                  value={account.balance}
+                  onChange={(e) => handleChange(e)}
+                />
+                <Typography sx={{ fontSize: 14 }} color="error" gutterBottom>
+                  {formErrors.balance}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button
+                  variant="contained"
+                  color="success"
+                  startIcon={<SaveAltIcon />}
+                  type="submit"
+                >
+                  Save
+                </Button>
+                <Button
+                  onClick={reset}
+                  variant="contained"
+                  color="error"
+                  startIcon={<DeleteIcon />}
+                  type="submit">
+                  Clear
+                </Button>
+              </CardActions>
+            </form>
+          </Grid>
+        </Card>
+      </Box>   
+        
+    </>
+  );
+};
 
-export default AddAccount
+export default AddAccount;

@@ -1,58 +1,62 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import ViewAccounts from './ViewAccounts';
+import Button from '@mui/material/Button';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
+
 
 const Customer = ({customer}) => {
     const navigate = useNavigate();
   return (
-    
-    <tr key={customer.id}>
-    <td className='text-left px-3 py-4 whitespace-nowrap'>
+    <>
+    <TableRow key={customer.id}>
+    <TableCell  className='text-left px-2 py-4 whitespace-nowrap'>
         <div className='text-sm text-gray-500'>{customer.name}</div>
-    </td>
-    <td className='text-left px-3 py-4 whitespace-nowrap'>
+    </TableCell>
+    <TableCell className='text-left px-2 py-4 whitespace-nowrap'>
         <div className='text-sm text-gray-500'>{customer.permanentAddress}</div>
-    </td>
-    <td className='text-left px-3 py-4 whitespace-nowrap'>
+    </TableCell>
+    <TableCell className='text-left px-2 py-4 whitespace-nowrap'>
         <div className='text-sm text-gray-500'>{customer.currentAddress}</div>
-    </td>
-    <td className='text-left px-3 py-4 whitespace-nowrap'>
+    </TableCell>
+    <TableCell className='text-left px-2 py-4 whitespace-nowrap'>
         <div className='text-sm text-gray-500'>{customer.occupation}</div>
-    </td>
-    <td className='text-left px-3 py-4 whitespace-nowrap'>
+    </TableCell>
+    <TableCell className='text-left px-2 py-4 whitespace-nowrap'>
         <div className='text-sm text-gray-500'>{customer.dob}</div>
-    </td>
-    <td className='text-left px-3 py-4 whitespace-nowrap'>
+    </TableCell>
+    <TableCell className='text-left px-2 py-4 whitespace-nowrap'>
         <div className='text-sm text-gray-500'>{customer.email}</div>
-    </td>
-    <td className='text-left px-3 py-4 whitespace-nowrap'>
+    </TableCell>
+    <TableCell className='text-left px-2 py-4 whitespace-nowrap'>
         <div className='text-sm text-gray-500'>{customer.contactDetails}</div>
-    </td>
-    <td className='text-left px-3 py-4 whitespace-nowrap'>
+    </TableCell>
+    <TableCell className='text-left px-2 py-4 whitespace-nowrap'>
         <div className='text-sm text-gray-500'>{customer.panNo}</div>
-    </td>
-    <td className='text-left px-3 py-4 whitespace-nowrap'>
+    </TableCell>
+    <TableCell className='text-left px-2 py-4 whitespace-nowrap'>
         <div className='text-sm text-gray-500'>{customer.aadharNo}</div>
-    </td>
-    <td className='text-left px-1 py-4 whitespace-nowrap'>
+    </TableCell>
+    <TableCell className='text-left px-1 py-4 whitespace-nowrap'>
         <div className='text-sm text-gray-500'>{customer.passportNo}</div>
-    </td>
-    <td className='text-left px-2 py-4 whitespace-nowrap'>
+    </TableCell>
+    <TableCell className='text-left px-2 py-4 whitespace-nowrap'>
         <div className='text-sm text-gray-500'>{customer.kycNo}</div>
-    </td>
-    <td className='text-left px-2 py-4 whitespace-nowrap'>
-        <div className='text-sm px-2 py-2 text-white bg-blue-500 hover:bg-blue-900'>
-            <button onClick={()=> navigate("/viewAccounts", {
+    </TableCell>
+    <TableCell className='text-left px-2 py-4 whitespace-nowrap'>
+        <div>
+            <Button color="success" variant="contained" startIcon={<VisibilityIcon/>} onClick={()=> navigate("/viewAccounts", {
         state: {
           "id": customer.id,
           "name":customer.name
         },
       })}>
-                View Accounts</button></div>
-    </td>
-    {/* <ViewAccounts customer={customer} id={customer.id}/> */}
+                View Accounts</Button></div>
+    </TableCell>
     
-</tr>
+</TableRow>
+</>
   )
 }
 

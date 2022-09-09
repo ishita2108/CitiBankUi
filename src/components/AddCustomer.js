@@ -1,7 +1,10 @@
 import React,{ useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import CustomerService from '../services/CustomerService';
-//import Moment from 'moment';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
 
 const AddCustomer = () => {
     const navigate = useNavigate();
@@ -102,8 +105,7 @@ const AddCustomer = () => {
   return (
     <div className='container mx-2 my-8'>
           <div className='h-12  mx-0'>
-        <button onClick={()=> navigate("/customerList")}
-        className='rounded bg-slate-600 text-white py-2 px-6 font-semibold'> Back</button>
+        <Button variant="contained" startIcon={<ArrowBackIcon />} color="primary"onClick={()=> navigate("/customerList")}> Back</Button>
         </div>
     <div className='flex  max-w-2xl mx-auto shadow border-b'>
         <div className='px-8 py-8'>
@@ -206,8 +208,8 @@ const AddCustomer = () => {
             <p className='text-red-500'>{formErrors.occupation}</p>
 
             <div className='items-center justify-center h-14 w-full my-4 space-x-4 pt-4'>
-               <button className='rounded text-white font-semibold bg-green-400 py-2 px-2 hover:bg-green-700' type='submit'>Save</button>
-               <button onClick={reset} className='rounded text-white font-semibold bg-red-400 py-2 px-2 hover:bg-red-700' type='submit'>Clear</button>
+               <Button variant="contained" startIcon={<SaveAltIcon/>}color="success" type='submit'>Save</Button>
+               <Button variant="contained" startIcon={<DeleteIcon />} onClick={reset} color="primary" type='submit'>Clear</Button>
             </div>
             </form>
 

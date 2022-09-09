@@ -21,8 +21,8 @@ function App() {
         <Route index element={<Login/>}></Route>
         <Route path="/customerList" element={<CustomerList/>}></Route>
         <Route path="/addCustomer" element={<AddCustomer />}></Route>
-        <Route path="/viewAccounts" element={<ViewAccounts />}></Route>
-        <Route path="/addAccounts" element={<AddAccount />}></Route>
+        <Route path="/viewAccounts" element={<ViewAccounts/>}></Route>
+        <Route path="/addAccounts" element={<AddAccount/>}></Route>
         <Route path="/aggBalance" element={<AggregateBalance />}></Route>
 
   </Routes>
